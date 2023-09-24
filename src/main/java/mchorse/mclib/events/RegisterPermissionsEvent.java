@@ -54,13 +54,16 @@ public class RegisterPermissionsEvent extends Event
      * Register the permission at the last registered category
      * @param permission
      * @throws UnsupportedOperationException if no category is present to add the permission to
+     * @return the registered permission
      */
-    public void registerPermission(PermissionCategory permission) throws UnsupportedOperationException
+    public PermissionCategory registerPermission(PermissionCategory permission) throws UnsupportedOperationException
     {
         if (this.currentCategory == null) throw new UnsupportedOperationException("No current category present to add the permission to!");
 
         this.currentCategory.addChild(permission);
         this.permissions.add(permission);
+
+        return permission;
     }
 
     /**
@@ -80,8 +83,7 @@ public class RegisterPermissionsEvent extends Event
 
     /**
      * End the current registered category and return to the parent category, so new permissions can be registered.
-     * If the current category is the mod category, then the mod category will be ended,
-     * so the registering process can start over with a new mod.
+     * If the current category is the mod category, then the mod category will be ended and so the registering process.
      */
     public void endCategory()
     {
@@ -94,11 +96,5 @@ public class RegisterPermissionsEvent extends Event
         {
             this.currentCategory = this.currentCategory.getParent();
         }
-    }
-
-    public void endMod()
-    {
-        this.currentMod = null;
-        this.currentCategory = null;
     }
 }

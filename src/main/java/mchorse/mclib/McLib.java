@@ -172,12 +172,13 @@ public class McLib
     {
         event.registerMod(MOD_ID, DefaultPermissionLevel.OP);
 
-        event.registerPermission(McLibPermissions.configEdit = new PermissionCategory("edit_config"));
+        McLibPermissions.configEdit = event.registerPermission(new PermissionCategory("edit_config"));
 
         event.registerCategory(new PermissionCategory("gui"));
-        event.registerPermission(McLibPermissions.accessGui = new PermissionCategory("access_gui"));
+        McLibPermissions.accessGui = event.registerPermission(new PermissionCategory("access_gui"));
 
-        event.endMod();
+        event.endCategory();
+        event.endCategory();
     }
 
     @Mod.EventHandler
